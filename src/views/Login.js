@@ -52,9 +52,14 @@ const Login = (props) => {
           <Row className="justify-content-center">
             <Col md="4">
               <div className="login-section">
-                <Card>
+                <Card className="pt-3 pb-3">
                   <Card.Header>
-                    <Card.Title as="h4" className="text-center">
+
+                    
+                      <div className="logo-img text-center">
+                        <img src={require("assets/img/logo-md.png")} alt="..." />
+                      </div>
+                    <Card.Title as="h4" className="text-center pt-3">
                       {" "}
                       Sign in to our platform{" "}
                     </Card.Title>
