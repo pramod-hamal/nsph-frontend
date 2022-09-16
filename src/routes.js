@@ -16,6 +16,7 @@
 
 */
 import Dashboard from "views/Dashboard.js";
+import Users from "views/Users.js";
 import UserProfile from "views/UserProfile.js";
 import TableList from "views/TableList.js";
 import Typography from "views/Typography.js";
@@ -40,35 +41,35 @@ const dashboardRoutes = [
     name: "Dashboard",
     icon: "nc-icon nc-chart-pie-35",
     component: Dashboard,
-    layout: "/admin"
+    layout: "/admin",
   },
   {
     path: "/user",
     name: "User List",
     icon: "nc-icon nc-circle-09",
-    component: UserProfile,
-    layout: "/admin"
+    component: Users,
+    layout: "/admin",
   },
   {
     path: "/chat",
     name: "Chat",
-    icon: "nc-icon nc-message-55",
+    icon: "nc-icon nc-circle-09",
     component: Chat,
-    layout: "/admin"
+    layout: "/admin",
   },
   {
     path: "/login",
     name: "Chat",
-    icon: "nc-icon nc-message-55",
+    icon: "nc-icon nc-circle-09",
     component: Login,
-    layout: "/auth"
-  }
+    layout: "/auth",
+  },
   // {
   //   path: "/table",
   //   name: "Table List",
   //   icon: "nc-icon nc-notes",
   //   component: TableList,
-  //   layout: "/admin"
+  //   layout: "/admin",
   // },
   // {
   //   path: "/typography",
@@ -98,7 +99,6 @@ const dashboardRoutes = [
   //   component: Notifications,
   //   layout: "/admin"
   // },
-
 ];
 
 export default dashboardRoutes;
