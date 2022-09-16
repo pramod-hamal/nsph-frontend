@@ -9,6 +9,7 @@ import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
 import routes from "routes.js";
 
 import sidebarImage from "assets/img/sidebar-3.jpg";
+import AddUser from "views/AddUser";
 
 function AdminLayout(props) {
   const [image, setImage] = React.useState(sidebarImage);
@@ -25,6 +26,7 @@ function AdminLayout(props) {
             path={prop.layout + prop.path}
             render={(props) => <prop.component {...props} />}
             key={key}
+            exact
           />
         );
       }
@@ -55,7 +57,10 @@ function AdminLayout(props) {
         <div className="main-panel" ref={mainPanel}>
           <AdminNavbar />
           <div className="content">
-            <Switch>{getRoutes(routes)}</Switch>
+            <Switch>
+              {getRoutes(routes)}
+              <Route exact path={"/admin/user/add"} component={AddUser}></Route>
+            </Switch>
           </div>
           <Footer />
         </div>

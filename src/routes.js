@@ -59,19 +59,19 @@ const dashboardRoutes = [
   },
   {
     path: "/login",
-    name: "Chat",
+    name: "Login",
     icon: "nc-icon nc-circle-09",
     component: Login,
     layout: "/auth",
   },
-  {
-    path: "/login",
-    name: "Chat",
-    icon: "nc-icon nc-circle-09",
-    component: Login,
-    layout: "/admin",
-    navItem: false,
-  },
+  // {
+  //   path: "/login",
+  //   name: "Chat",
+  //   icon: "nc-icon nc-circle-09",
+  //   component: Login,
+  //   layout: "/admin",
+  //   navItem: false,
+  // },
   // {
   //   path: "/table",
   //   name: "Table List",
