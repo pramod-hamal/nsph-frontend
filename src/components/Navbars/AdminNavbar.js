@@ -1,6 +1,10 @@
 
+import React, { Component } from "react";
+import { useLocation } from "react-router-dom";
+
 import React from "react";
 import { useHistory, useLocation } from "react-router-dom";
+
 import { Navbar, Container, Nav, Dropdown, Button } from "react-bootstrap";
 
 import routes from "routes.js";
@@ -37,7 +41,7 @@ function Header() {
     history.push("/auth/login")
   }
   return (
-    <Navbar bg="light" expand="lg">
+    <Navbar bg="" expand="lg">
       <Container fluid>
         <div className="d-flex justify-content-center align-items-center ml-2 ml-lg-0">
           <Button
@@ -52,7 +56,7 @@ function Header() {
             onClick={(e) => e.preventDefault()}
             className="mr-2"
           >
-            {getBrandText()}
+           
           </Navbar.Brand>
         </div>
         <Navbar.Toggle aria-controls="basic-navbar-nav" className="mr-2">
@@ -61,16 +65,15 @@ function Header() {
           <span className="navbar-toggler-bar burger-lines"></span>
         </Navbar.Toggle>
         <Navbar.Collapse id="basic-navbar-nav">
-          <Nav className="nav mr-auto" navbar>
+          
+          <Nav className="ml-auto" navbar>
             <Nav.Item>
               <Nav.Link
-                data-toggle="dropdown"
+                className="m-0"
                 href="#pablo"
                 onClick={(e) => e.preventDefault()}
-                className="m-0"
               >
-                <i className="nc-icon nc-palette"></i>
-                <span className="d-lg-none ml-1">Dashboard</span>
+                <span className="no-icon">Account</span>
               </Nav.Link>
             </Nav.Item>
             <Dropdown as={Nav.Item}>
@@ -118,27 +121,6 @@ function Header() {
                 </Dropdown.Item>
               </Dropdown.Menu>
             </Dropdown>
-            <Nav.Item>
-              <Nav.Link
-                className="m-0"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
-              >
-                <i className="nc-icon nc-zoom-split"></i>
-                <span className="d-lg-block"> Search</span>
-              </Nav.Link>
-            </Nav.Item>
-          </Nav>
-          <Nav className="ml-auto" navbar>
-            <Nav.Item>
-              <Nav.Link
-                className="m-0"
-                href="#pablo"
-                onClick={(e) => e.preventDefault()}
-              >
-                <span className="no-icon">Account</span>
-              </Nav.Link>
-            </Nav.Item>
             <Dropdown as={Nav.Item}>
               <Dropdown.Toggle
                 aria-expanded={false}

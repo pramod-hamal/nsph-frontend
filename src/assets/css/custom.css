@@ -92,6 +92,30 @@
     line-height: 45px;
 }
 
+.bg-white {
+    background: #fff;
+}
+
+.sidebar:after, body > .navbar-collapse:after {
+    background: #486CFE;
+    background: linear-gradient(to bottom, #7D96FB 0%, #486CFE 100%);
+    background-size: 150% 150%;
+    z-index: 3;
+    opacity: 1;
+}
+
+.sidebar .nav li .nav-link p {
+    color: #fff;
+}
+
+.sidebar .logo-img img {
+    max-width: 54px;
+}
+
+.navbar {
+    box-shadow: 0 0 2rem 0 rgb(41 48 66 / 10%);
+}
+
 .avatar-box .avatar-status {
     width: 15px;
     height: 15px;

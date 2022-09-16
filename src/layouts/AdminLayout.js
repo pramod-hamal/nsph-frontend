@@ -12,7 +12,7 @@ import sidebarImage from "assets/img/sidebar-3.jpg";
 
 function AdminLayout(props) {
   const [image, setImage] = React.useState(sidebarImage);
-  const [color, setColor] = React.useState("black");
+  const [color, setColor] = React.useState("white");
   const [hasImage, setHasImage] = React.useState(true);
   const location = useLocation();
   const history = useHistory();
