@@ -27,7 +27,7 @@ import "./assets/css/demo.css";
 import "@fortawesome/fontawesome-free/css/all.min.css";
 import "./assets/css/custom.css";
 
-import AdminLayout from "layouts/Admin.js";
+import AdminLayout from "layouts/AdminLayout";
 import AuthLayout from "layouts/AuthLayout";
 import ProtectedRoute from "route/ProtectedRoute";
 
@@ -35,8 +35,9 @@ const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <Switch>
-      {/* <ProtectedRoute path="/nsph"/> */}
+      {/* <Route path="/nsph" render={props => <ProtectedRoute {...props} /> }/> */}
       <Route  path="/auth" render={(props) => <AuthLayout {...props} />} />
+      <Route  path="/admin" render={(props) => <AdminLayout {...props} />} />
       <Redirect from="/" to="/auth/login" />
     </Switch>
   </BrowserRouter>

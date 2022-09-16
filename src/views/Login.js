@@ -18,12 +18,12 @@ import {
 const Login = (props) => {
 
 
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("loggedInUser"));
-    if(user) {
-      props.history.push("/admin/dashboard");
-    }
-  },[])
+  // const user = JSON.parse(localStorage.getItem("loggedInUser"));
+  // useEffect(() => {
+  //   if(user) {
+  //     props.history.push("/admin/dashboard");
+  //   }
+  // },[user])
   const [info, setInfo] = useState({
     "email":"",
     "password": ""
@@ -31,15 +31,13 @@ const Login = (props) => {
 
   const handleChange = (e) => {
     var { name, value } = e.target;
-    // console.log("intofL:", info);
     setInfo({ ...info, [name]: value });
   }
   const handleSubmit = async (e) => {
     e.preventDefault();
     try{
-      const user = await axios().post("/api/auth/login", info);
-      localStorage.setItem("loggedInUser", JSON.stringify(user));
-      // nav igate("/admin/dashboard");
+      const response = await axios().post("/api/auth/login", info);
+      localStorage.setItem("loggedInUser", JSON.stringify(response.data));
       props.history.push("/admin/dashboard")
     }catch(err) {
       console.log("error ", err);
