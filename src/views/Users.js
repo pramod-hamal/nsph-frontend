@@ -1,5 +1,6 @@
 import React from "react";
 // react-bootstrap components
+import {Link } from 'react-router-dom'
 import {
   Badge,
   Button,
@@ -16,6 +17,15 @@ const Users = () => {
   return (
     <>
       <Container fluid>
+        <Row className="mb-2">
+          <Col md="12">
+            <div className="add-btn text-right">
+              <Link to="" class="btn btn-brand">
+                    Add
+              </Link>
+            </div>
+          </Col>
+        </Row>
         <Row>
           <Col md="12">
             <Card className="strpied-tabled-with-hover">
