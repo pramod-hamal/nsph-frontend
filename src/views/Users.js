@@ -1,6 +1,6 @@
 import React from "react";
 // react-bootstrap components
-import {Link } from 'react-router-dom'
+import { Link } from "react-router-dom";
 import {
   Badge,
   Button,
@@ -20,8 +20,8 @@ const Users = () => {
         <Row className="mb-2">
           <Col md="12">
             <div className="add-btn text-right">
-              <Link to="" class="btn btn-brand">
-                    Add
+              <Link to="/admin/user/add" class="btn btn-brand">
+                Add
               </Link>
             </div>
           </Col>
