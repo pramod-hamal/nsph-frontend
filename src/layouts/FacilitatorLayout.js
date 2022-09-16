@@ -38,12 +38,12 @@ function CustomerLayout() {
       if (prop.layout === "/facilitator") {
         return (
           <Route
-            path={prop.layout + prop.path}
+            path={process.env.BASE_NAME || "nsph" + prop.layout + prop.path}
             render={(props) => <prop.component {...props} />}
             key={key}
           />
         );
-      } 
+      }
     });
   };
   React.useEffect(() => {

@@ -35,12 +35,12 @@ function AuthLayout() {
       if (prop.layout === "/auth") {
         return (
           <Route
-            path={prop.layout + prop.path}
+            path={ prop.layout + prop.path}
             render={(props) => <prop.component {...props} />}
             key={key}
           />
         );
-      } 
+      }
     });
   };
   React.useEffect(() => {
