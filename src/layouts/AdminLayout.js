@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation, Route, Switch } from "react-router-dom";
+import { useLocation, Route, Switch, useHistory } from "react-router-dom";
 
 import AdminNavbar from "components/Navbars/AdminNavbar";
 import Footer from "components/Footer/Footer";
@@ -10,11 +10,12 @@ import routes from "routes.js";
 
 import sidebarImage from "assets/img/sidebar-3.jpg";
 
-function AdminLayout() {
+function AdminLayout(props) {
   const [image, setImage] = React.useState(sidebarImage);
   const [color, setColor] = React.useState("white");
   const [hasImage, setHasImage] = React.useState(true);
   const location = useLocation();
+  const history = useHistory();
   const mainPanel = React.useRef(null);
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
@@ -42,6 +43,11 @@ function AdminLayout() {
       element.parentNode.removeChild(element);
     }
   }, [location]);
+
+  const loggedInUser = localStorage.getItem("loggedInUser");
+  if (!loggedInUser) {
+    props.history.push("/auth/login");
+  }
   return (
     <>
       <div className="wrapper">
@@ -61,7 +67,7 @@ function AdminLayout() {
         setColor={(color) => setColor(color)}
         image={image}
         setImage={(image) => setImage(image)}
-      />
+      />{" "}
     </>
   );
 }

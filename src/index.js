@@ -1,20 +1,3 @@
-/*!
-
-=========================================================
-* Light Bootstrap Dashboard React - v2.0.1
-=========================================================
-
-* Product Page: https://www.creative-tim.com/product/light-bootstrap-dashboard-react
-* Copyright 2022 Creative Tim (https://www.creative-tim.com)
-* Licensed under MIT (https://github.com/creativetimofficial/light-bootstrap-dashboard-react/blob/master/LICENSE.md)
-
-* Coded by Creative Tim
-
-=========================================================
-
-* The above copyright notice and this permission notice shall be included in all copies or substantial portions of the Software.
-
-*/
 import React from "react";
 import ReactDOM from "react-dom/client";
 
@@ -29,13 +12,11 @@ import "./assets/css/custom.css";
 
 import AdminLayout from "layouts/AdminLayout";
 import AuthLayout from "layouts/AuthLayout";
-import ProtectedRoute from "route/ProtectedRoute";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <Switch>
-      {/* <Route path="/nsph" render={props => <ProtectedRoute {...props} /> }/> */}
       <Route  path="/auth" render={(props) => <AuthLayout {...props} />} />
       <Route  path="/admin" render={(props) => <AdminLayout {...props} />} />
       <Redirect from="/" to="/auth/login" />

@@ -18,12 +18,12 @@ import {
 const Login = (props) => {
 
 
-  // const user = JSON.parse(localStorage.getItem("loggedInUser"));
-  // useEffect(() => {
-  //   if(user) {
-  //     props.history.push("/admin/dashboard");
-  //   }
-  // },[user])
+  const user = JSON.parse(localStorage.getItem("loggedInUser"));
+  useEffect(() => {
+    if(user) {
+      props.history.push("/admin/dashboard");
+    }
+  },[user])
   const [info, setInfo] = useState({
     "email":"",
     "password": ""
