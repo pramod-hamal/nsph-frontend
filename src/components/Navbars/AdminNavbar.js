@@ -1,7 +1,3 @@
-
-import React, { Component } from "react";
-import { useLocation } from "react-router-dom";
-
 import React from "react";
 import { useHistory, useLocation } from "react-router-dom";
 

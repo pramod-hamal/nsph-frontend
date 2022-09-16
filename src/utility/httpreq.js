@@ -3,7 +3,7 @@ import Axios from "axios";
 const headers = (secured, file) => {
   let options = {
     "Content-Type": "application/json",
-    "Access-Control-Allow-Origin": "*",
+    // "Access-Control-Allow-Origin": "*",
   };
   if (secured) {
     options["Authorization"] = localStorage.getItem("token");
