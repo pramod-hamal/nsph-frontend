@@ -35,7 +35,7 @@ function CustomerLayout() {
   const mainPanel = React.useRef(null);
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
-      if (prop.layout === "/customer") {
+      if (prop.layout === "/facilitator") {
         return (
           <Route
             path={prop.layout + prop.path}

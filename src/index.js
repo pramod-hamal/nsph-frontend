@@ -29,12 +29,13 @@ import "./assets/css/custom.css";
 
 import AdminLayout from "layouts/Admin.js";
 import AuthLayout from "layouts/AuthLayout";
+import ProtectedRoute from "route/ProtectedRoute";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
   <BrowserRouter>
     <Switch>
-      <Route  path="/admin" render={(props) => <AdminLayout {...props} />} />
+      {/* <ProtectedRoute path="/nsph"/> */}
       <Route  path="/auth" render={(props) => <AuthLayout {...props} />} />
       <Redirect from="/" to="/auth/login" />
     </Switch>
