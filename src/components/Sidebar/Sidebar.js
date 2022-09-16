@@ -12,13 +12,9 @@ function Sidebar({ color, image, routes }) {
   };
   return (
     <div className="sidebar bg-white">
-      
       <div className="sidebar-wrapper">
         <div className="logo d-flex align-items-center justify-content-center">
-          <a
-            href=""
-            className="simple-text logo-mini mx-1"
-          >
+          <a href="" className="simple-text logo-mini mx-1">
             <div className="logo-img">
               <img src={require("assets/img/logo-white.png")} alt="..." />
             </div>
