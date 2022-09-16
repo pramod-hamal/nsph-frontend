@@ -44,10 +44,10 @@ function AdminLayout(props) {
     }
   }, [location]);
 
-  const loggedInUser = localStorage.getItem("loggedInUser");
-  if (!loggedInUser) {
-    props.history.push("/auth/login");
-  }
+  // const loggedInUser = localStorage.getItem("loggedInUser");
+  // if (!loggedInUser) {
+  //   props.history.push("/auth/login");
+  // }
   return (
     <>
       <div className="wrapper">
