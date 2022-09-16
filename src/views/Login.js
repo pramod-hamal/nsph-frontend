@@ -1,4 +1,7 @@
-import React from "react";
+
+import React, { useEffect, useState } from "react";
+import { axios } from "utility/httpreq";
+// import {useNavigate} from "react-router-dom"
 
 import {
   Badge,
@@ -12,7 +15,36 @@ import {
   Col,
 } from "react-bootstrap";
 
-const Login = () => {
+const Login = (props) => {
+
+
+  useEffect(() => {
+    const user = JSON.parse(localStorage.getItem("loggedInUser"));
+    if(user) {
+      props.history.push("/admin/dashboard");
+    }
+  },[])
+  const [info, setInfo] = useState({
+    "email":"",
+    "password": ""
+  });
+
+  const handleChange = (e) => {
+    var { name, value } = e.target;
+    // console.log("intofL:", info);
+    setInfo({ ...info, [name]: value });
+  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try{
+      const user = await axios().post("/api/auth/login", info);
+      localStorage.setItem("loggedInUser", JSON.stringify(user));
+      // nav igate("/admin/dashboard");
+      props.history.push("/admin/dashboard")
+    }catch(err) {
+      console.log("error ", err);
+    }
+  }
   return (
     <>
       <div className="login-page-wrapper">
@@ -28,7 +60,7 @@ const Login = () => {
                     </Card.Title>
                   </Card.Header>
                   <Card.Body>
-                    <Form>
+                    <Form onSubmit={handleSubmit}>
                       <Row>
                         <Col className="pl-5 pr-5" md="12">
                           <Form.Group>
@@ -38,6 +70,9 @@ const Login = () => {
                             <Form.Control
                               placeholder="Email"
                               type="email"
+                              name="email"
+                              value={info.email}
+                              onChange={handleChange}
                             ></Form.Control>
                           </Form.Group>
                         </Col>
@@ -52,6 +87,9 @@ const Login = () => {
                             <Form.Control
                               placeholder="Password"
                               type="password"
+                              name="password"
+                              value={info.password}
+                              onChange={handleChange}
                             ></Form.Control>
                           </Form.Group>
                         </Col>

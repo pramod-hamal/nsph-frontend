@@ -31,14 +31,12 @@ import AdminLayout from "layouts/Admin.js";
 import AuthLayout from "layouts/AuthLayout";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
-
 root.render(
   <BrowserRouter>
     <Switch>
-      <Route path="/admin" render={(props) => <AdminLayout {...props} />} />
-      <Route path="/auth" render={(props) => <AuthLayout {...props} />} />
-
-      <Redirect from="/" to="/auth" />
+      <Route  path="/admin" render={(props) => <AdminLayout {...props} />} />
+      <Route  path="/auth" render={(props) => <AuthLayout {...props} />} />
+      <Redirect from="/" to="/auth/login" />
     </Switch>
   </BrowserRouter>
 );
