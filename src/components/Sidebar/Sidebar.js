@@ -19,18 +19,18 @@ function Sidebar({ color, image, routes }) {
         }}
       />
       <div className="sidebar-wrapper">
-        <div className="logo d-flex align-items-center justify-content-start">
+        <div className="logo d-flex align-items-center justify-content-center">
           <a
             href="https://www.creative-tim.com?ref=lbd-sidebar"
             className="simple-text logo-mini mx-1"
           >
             <div className="logo-img">
-              <img src={require("assets/img/reactlogo.png")} alt="..." />
+              <img src={require("assets/img/logo-md.png")} alt="..." />
             </div>
           </a>
-          <a className="simple-text" href="">
+          {/* <a className="simple-text" href="">
             NSPH
-          </a>
+          </a> */}
         </div>
         <Nav>
           {routes.map((prop, key) => {

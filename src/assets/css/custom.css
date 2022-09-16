@@ -1,3 +1,60 @@
+@font-face {
+    font-family: Quicksand-Bold;
+    src: url(../fonts/Quicksand-Bold.ttf);
+  }
+@font-face {
+    font-family: Quicksand-Light;
+    src: url(../fonts/Quicksand-Light.ttf);
+  }
+@font-face {
+    font-family: Quicksand-Medium;
+    src: url(../fonts/Quicksand-Medium.ttf);
+  }
+@font-face {
+    font-family: Quicksand-Regular;
+    src: url(../fonts/Quicksand-Regular.ttf);
+  }
+@font-face {
+    font-family: Quicksand-SemiBolld;
+    src: url(../fonts/Quicksand-SemiBold.ttf);
+  }
+
+  /* Inter font */
+
+  @font-face {
+    font-family: Inter-Bold;
+    src: url(../fonts/Inter-Bold.ttf);
+  }
+  @font-face {
+    font-family: Inter-Regular;
+    src: url(../fonts/Inter-Regular.ttf);
+  }
+  @font-face {
+    font-family: Inter-SemiBold;
+    src: url(../fonts/Inter-SemiBold.ttf);
+  }
+
+
+  body {
+    font-family: Quicksand-Regular;
+  }
+
+  p {
+    font-family: Quicksand-Regular;
+    font-style: normal;
+    font-weight: 500;
+    font-size: 15px;
+    line-height: 19px;
+    text-align: center;
+
+    color: #3E3E3E;
+  }
+
+  h1, h2, h3, h4, h5, h5 {
+    font-family: Inter-Regular;
+    font-weight: 600;
+  }
+
 .login-page-wrapper {
     height: 100vh;
     display: flex;
@@ -10,4 +67,126 @@
     box-shadow: 0px 0px 20px 0px rgb(76 87 125 / 2%);
     border-radius: 0.625rem;
     border: none;
+}
+
+/* chat */ 
+
+.avatar-box {
+    width: 45px;
+    height: 45px;
+    border-radius: 50%;
+    position: relative;
+}
+
+.avatar-box .avatar-label {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: 500;
+    color: #3F4254;
+}
+
+.bg-light-danger {
+    background-color: #FFF5F8 !important;
+    line-height: 45px;
+}
+
+.avatar-box .avatar-status {
+    width: 15px;
+    height: 15px;
+    border-radius: 50%;
+    position: absolute;
+    border-radius: 100%;
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%) translateY(-50%) !important;
+    margin-left: -0.5rem;
+    margin-top: -0.5rem;
+}
+
+.bg-success {
+    background-color: #50CD89;
+}
+
+.bg-light-info {
+    background-color: #F8F5FF;
+}
+
+.bg-light-primary {
+    background-color: #F1FAFF!important;
+}
+
+.start-100 {
+    left: 100% !important;
+}
+.top-100 {
+    top: 100% !important;
+}
+
+.chat-username {
+    font-family: 'Inter-Regular';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    color: #343434;
+}
+
+.chat-username-sm {
+    font-family: 'Inter-Regular';
+    font-style: normal;
+    font-weight: 600;
+    font-size: 16px;
+    line-height: 19px;
+    color: #343434;
+}
+
+.text-muted {
+    color: #666;
+    font-weight: 400;
+    
+}
+
+.conversation-text .chat-username {
+    font-weight: 500;
+}
+
+.voice-call-btn, .video-call-btn {
+    background: #05BAFF!important;
+    border-color: #05BAFF!important;
+    width: 20px;
+    height: 20px;
+}
+
+.voice-call-btn svg, .video-call-btn svg {
+    fill: #fff;
+}
+
+.voice-call-btn, .video-call-btn, .more-btn {
+    border-radius: 50px;
+    border-radius: 50px;
+    padding: 0;
+    width: 48px;
+    height: 46px;
+    line-height: 41px;
+}
+
+.form-control.form-control-flush {
+    border: 0;
+    background-color: transparent;
+    outline: none !important;
+    box-shadow: none;
+    border-radius: 0;
+}
+
+.send-help textarea {
+    background: rgba(196, 196, 196, 0.22)!important;
+    border-radius: 40px!important;
+    padding-left: 25px;
+}
+
+.btn-brand {
+    background-color: #05BAFF;
+    border-color: #05BAFF;
+    color: #fff;
 }
