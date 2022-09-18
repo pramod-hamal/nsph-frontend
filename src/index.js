@@ -19,7 +19,8 @@ root.render(
     <Switch>
       <Route  path="/auth" render={(props) => <AuthLayout {...props} />} />
       <Route  path="/admin" render={(props) => <AdminLayout {...props} />} />
-      <Redirect from="/" to="/auth/login" />
+      {/* <Route path="/nsph" render={(props) => <ProtectedRoute {...props} />} /> */}
+      {/* <Redirect from="/" to="/auth/login" /> */}
     </Switch>
   </BrowserRouter>
 );

@@ -15,7 +15,7 @@ import routes from "routes.js";
 import sidebarImage from "assets/img/sidebar-3.jpg";
 import CaseLayout from "components/routes/CaseRoute";
 
-function AdminLayout(props) {
+function FacilitatorRoute(props) {
   const [image, setImage] = React.useState(sidebarImage);
   const [color, setColor] = React.useState("white");
   const [hasImage, setHasImage] = React.useState(true);
@@ -71,4 +71,4 @@ function AdminLayout(props) {
   );
 }
 
-export default AdminLayout;
+export default FacilitatorRoute;
