@@ -25,7 +25,7 @@ function Sidebar({ color, image, routes }) {
         </div>
         <Nav>
           {routes.map((prop, key) => {
-            if (!prop.redirect && prop.layout == "/admin")
+            if (!prop.redirect && prop.permission != "view_chat")
               return (
                 <li
                   className={

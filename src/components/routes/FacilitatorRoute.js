@@ -45,7 +45,7 @@ function FacilitatorRoute(props) {
           <AdminNavbar />
           <div className="content">
             {loggedInUser ? (
-              <CaseLayout role="admin" />
+              <CaseLayout role="facilitator" />
             ) : (
               // <Switch>
               //   <Redirect to="/auth/login" />

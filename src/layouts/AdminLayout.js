@@ -1,5 +1,5 @@
 import React from "react";
-import { useLocation, Switch, Redirect } from "react-router-dom";
+import { useLocation, Switch, Redirect, Route } from "react-router-dom";
 
 import AdminNavbar from "components/Navbars/AdminNavbar";
 import Footer from "components/Footer/Footer";
@@ -8,7 +8,7 @@ import Sidebar from "components/Sidebar/Sidebar";
 import routes from "routes.js";
 
 import sidebarImage from "assets/img/sidebar-3.jpg";
-import CaseLayout from "components/routes/CaseRoute";
+import AddUser from "views/AddUser";
 
 function AdminLayout(props) {
   const [image, setImage] = React.useState(sidebarImage);
@@ -16,7 +16,20 @@ function AdminLayout(props) {
   const [hasImage, setHasImage] = React.useState(true);
   const location = useLocation();
   const mainPanel = React.useRef(null);
-
+ const getRoutes = (routes) => {
+    return routes.map((prop, key) => {
+      if (prop.layout === "/admin" && props.permission != "view_chat") {
+        return (
+          <Route
+            path={prop.layout + prop.path}
+            render={(props) => <prop.component {...props} />}
+            key={key}
+            exact
+          />
+        );
+      }
+    });
+  };
   React.useEffect(() => {
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
@@ -44,12 +57,17 @@ function AdminLayout(props) {
           <AdminNavbar />
           <div className="content">
             {loggedInUser ? (
-              <CaseLayout role="admin" />
+               <>
+               <Switch>
+                 {getRoutes(routes)}
+                 <Route exact path={"/admin/user/add"} component={AddUser}></Route>{" "}
+               </Switch>
+               </>
             ) : (
-              // <Switch>
-              //   <Redirect to="/auth/login" />
-              // </Switch>
-              <CaseLayout role="admin" />
+              <Switch>
+                <Redirect to="/auth/login" />
+              </Switch>
+              // <CaseLayout role="admin" />
             )}
           </div>
           <Footer />
