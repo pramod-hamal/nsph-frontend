@@ -51,9 +51,10 @@ function FacilitatorRoute(props) {
             {loggedInUser ? (
               <CaseLayout role="admin" />
             ) : (
-              <Switch>
-                <Redirect to="/auth/login" />
-              </Switch>
+              // <Switch>
+              //   <Redirect to="/auth/login" />
+              // </Switch>
+              <CaseLayout role="admin"/>
             )}
           </div>
           <Footer />
