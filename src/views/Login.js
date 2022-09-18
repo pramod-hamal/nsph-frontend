@@ -4,12 +4,11 @@ import { axios } from "utility/httpreq";
 // import {useNavigate} from "react-router-dom"
 
 import {
-  Badge,
+
   Button,
   Card,
   Form,
-  Navbar,
-  Nav,
+
   Container,
   Row,
   Col,
@@ -37,7 +36,8 @@ const Login = (props) => {
     e.preventDefault();
     try{
       const response = await axios().post("/api/auth/login", info);
-      localStorage.setItem("loggedInUser", JSON.stringify(response.data));
+      localStorage.setItem("loggedInUser", JSON.stringify(response.data.user));
+      localStorage.setItem("token", response.data.token);
       props.history.push("/admin/dashboard")
     }catch(err) {
       console.log("error ", err);
