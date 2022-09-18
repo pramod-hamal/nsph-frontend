@@ -1,26 +1,30 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 // react-bootstrap components
 import { Link } from "react-router-dom";
-import {
-  Badge,
-  Button,
-  Card,
-  Navbar,
-  Nav,
-  Table,
-  Container,
-  Row,
-  Col,
-} from "react-bootstrap";
+import { Card, Table, Container, Row, Col } from "react-bootstrap";
+import { axios } from "utility/httpreq";
 
 const Users = () => {
+  const [users, setUsers] = useState(null);
+  useEffect(() => {
+    const runAsync = async function () {
+      try {
+        const response = await axios(true).get("/api/user/list");
+        setUsers(response.data);
+      } catch (err) {
+        console.log("error is", err);
+      }
+    };
+
+    runAsync();
+  }, []);
   return (
     <>
       <Container fluid>
         <Row className="mb-2">
           <Col md="12">
             <div className="add-btn text-right">
-              <Link to="/admin/user/add" class="btn btn-brand">
+              <Link to="/admin/user/add" className="btn btn-brand">
                 Add
               </Link>
             </div>
@@ -39,56 +43,23 @@ const Users = () => {
                 <Table className="table-hover table-striped">
                   <thead>
                     <tr>
-                      <th className="border-0">ID</th>
+                      <th className="border-0">SN</th>
                       <th className="border-0">Name</th>
-                      <th className="border-0">Salary</th>
-                      <th className="border-0">Country</th>
-                      <th className="border-0">City</th>
+                      <th className="border-0">Email</th>
+                      <th className="border-0">Status</th>
+                      <th className="border-0">Role</th>
                     </tr>
                   </thead>
                   <tbody>
-                    <tr>
-                      <td>1</td>
-                      <td>Dakota Rice</td>
-                      <td>$36,738</td>
-                      <td>Niger</td>
-                      <td>Oud-Turnhout</td>
+                    {users && users.map( (user, index) => {
+                      return <tr>
+                      <td>{index + 1}</td>
+                      <td>{user.name}</td>
+                      <td>{user.email}</td>
+                      <td>{user.status}</td>
+                      <td>Admin</td>
                     </tr>
-                    <tr>
-                      <td>2</td>
-                      <td>Minerva Hooper</td>
-                      <td>$23,789</td>
-                      <td>Curaçao</td>
-                      <td>Sinaai-Waas</td>
-                    </tr>
-                    <tr>
-                      <td>3</td>
-                      <td>Sage Rodriguez</td>
-                      <td>$56,142</td>
-                      <td>Netherlands</td>
-                      <td>Baileux</td>
-                    </tr>
-                    <tr>
-                      <td>4</td>
-                      <td>Philip Chaney</td>
-                      <td>$38,735</td>
-                      <td>Korea, South</td>
-                      <td>Overland Park</td>
-                    </tr>
-                    <tr>
-                      <td>5</td>
-                      <td>Doris Greene</td>
-                      <td>$63,542</td>
-                      <td>Malawi</td>
-                      <td>Feldkirchen in Kärnten</td>
-                    </tr>
-                    <tr>
-                      <td>6</td>
-                      <td>Mason Porter</td>
-                      <td>$78,615</td>
-                      <td>Chile</td>
-                      <td>Gloucester</td>
-                    </tr>
+                    })}
                   </tbody>
                 </Table>
               </Card.Body>

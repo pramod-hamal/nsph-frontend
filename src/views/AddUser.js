@@ -1,18 +1,52 @@
-import React from "react";
-
+import React, { useEffect, useState } from "react";
 import {
-  Badge,
+
   Button,
   Card,
   Form,
-  Navbar,
-  Nav,
   Container,
   Row,
   Col,
 } from "react-bootstrap";
+import { useHistory } from "react-router";
+import { axios } from "utility/httpreq";
 
 const AddUser = () => {
+  const history = useHistory();
+  const [roles, setRoles] = useState(null);
+  const [formData, setFormData] = useState({
+    firstname: "",
+    lastname:"",
+    email:"",
+    password:"",
+    role:""
+  })
+  useEffect( () => {
+    const runAsync = async function(){
+      try{
+        const response = await axios(true).get("/api/role/list");
+        setRoles(response.data);
+      }catch(err){
+        console.log("error is", err);
+      }
+     
+    }
+    runAsync();
+  }, [])
+
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+    try {
+      await axios(true).post("/api/user/create", formData);
+      history.push("/admin/user")
+    } catch (error) {
+      console.log("error is", error);
+    }
+  }
+  const handleChange = (e) => {
+    const {name, value} = e.target;
+    setFormData({...formData, [name]: value})
+  }
   return (
     <>
       <Container fluid>
@@ -23,7 +57,7 @@ const AddUser = () => {
                 <Card.Title as="h4"> Add User</Card.Title>
               </Card.Header>
               <Card.Body>
-                <Form>
+                <Form onSubmit={handleSubmit}>
                   <Row>
                     <Col className="pr-1" md="6">
                       <Form.Group>
@@ -31,6 +65,10 @@ const AddUser = () => {
                         <Form.Control
                           placeholder="First Name"
                           type="text"
+                          name="firstname"
+                          value={formData.firstname}
+                          required
+                          onChange={handleChange}
                         ></Form.Control>
                       </Form.Group>
                     </Col>
@@ -40,6 +78,11 @@ const AddUser = () => {
                         <Form.Control
                           placeholder="Last Name"
                           type="text"
+                          name="lastname"
+                          value={formData.lastname}
+                          required
+                          onChange={handleChange}
+
                         ></Form.Control>
                       </Form.Group>
                     </Col>
@@ -53,6 +96,11 @@ const AddUser = () => {
                         <Form.Control
                           placeholder="Email"
                           type="email"
+                          name="email"
+                          value={formData.email}
+                          required
+                          onChange={handleChange}
+
                         ></Form.Control>
                       </Form.Group>
                     </Col>
@@ -62,6 +110,11 @@ const AddUser = () => {
                         <Form.Control
                           placeholder="Password"
                           type="password"
+                          name="password"
+                          value={formData.password}
+                          onChange={handleChange}
+
+                          required
                         ></Form.Control>
                       </Form.Group>
                     </Col>
@@ -70,10 +123,14 @@ const AddUser = () => {
                   <Row>
                     <Col className="pr-1" md="6">
                       <Form.Group>
-                        <label htmlFor="typeSelect">Type</label>
-                        <select class="form-control">
-                          <option> User </option>
-                          <option> Facilitator </option>
+                        <label htmlFor="typeSelect">Role</label>
+                        <select required name="role" class="form-control" onChange={handleChange}>
+                          <option></option>
+                          {
+                            roles && roles.map(function(role){
+                              return <option key={role._id} value={role._id}> {role.name}</option>
+                            })
+                          }
                         </select>
                       </Form.Group>
                     </Col>

@@ -1,6 +1,6 @@
 import React from "react";
 import {
-  Route,
+  Route, Switch,
 
 } from "react-router-dom";
 
@@ -25,10 +25,12 @@ function AdminRoute(props) {
   };
 
   return (
-    <switch>
+    <>
+    <Switch>
       {getRoutes(routes)}
       <Route exact path={"/admin/user/add"} component={AddUser}></Route>{" "}
-    </switch>
+    </Switch>
+    </>
   );
 }
 

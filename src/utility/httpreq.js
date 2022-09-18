@@ -6,7 +6,7 @@ const headers = (secured, file) => {
     // "Access-Control-Allow-Origin": "*",
   };
   if (secured) {
-    options["Authorization"] = localStorage.getItem("token");
+    options["x-access-token"] = localStorage.getItem("token");
   }
   if (file) {
     options["Content-Type"] = "multipart/form-data";
