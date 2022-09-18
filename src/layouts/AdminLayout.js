@@ -9,6 +9,7 @@ import routes from "routes.js";
 
 import sidebarImage from "assets/img/sidebar-3.jpg";
 import AddUser from "views/AddUser";
+import EditUser from "views/EditUser";
 
 function AdminLayout(props) {
   const [image, setImage] = React.useState(sidebarImage);
@@ -16,7 +17,7 @@ function AdminLayout(props) {
   const [hasImage, setHasImage] = React.useState(true);
   const location = useLocation();
   const mainPanel = React.useRef(null);
- const getRoutes = (routes) => {
+  const getRoutes = (routes) => {
     return routes.map((prop, key) => {
       if (prop.layout === "/admin" && props.permission != "view_chat") {
         return (
@@ -57,16 +58,36 @@ function AdminLayout(props) {
           <AdminNavbar />
           <div className="content">
             {loggedInUser ? (
-               <>
-               <Switch>
-                 {getRoutes(routes)}
-                 <Route exact path={"/admin/user/add"} component={AddUser}></Route>{" "}
-               </Switch>
-               </>
+              <>
+                <Switch>
+                  {getRoutes(routes)}
+                  <Route
+                    exact
+                    path={"/admin/user/add"}
+                    component={AddUser}
+                  ></Route>{" "}
+                </Switch>
+              </>
             ) : (
-              <Switch>
-                <Redirect to="/auth/login" />
-              </Switch>
+              <>
+                {/* <Switch>
+                  <Redirect to="/auth/login" />
+                </Switch> */}
+
+                <Switch>
+                  {getRoutes(routes)}
+                  <Route
+                    exact
+                    path={"/admin/user/add"}
+                    component={AddUser}
+                  ></Route>{" "}
+                  <Route
+                    exact
+                    path={"/admin/user/edit"}
+                    component={EditUser}
+                  ></Route>
+                </Switch>
+              </>
               // <CaseLayout role="admin" />
             )}
           </div>
