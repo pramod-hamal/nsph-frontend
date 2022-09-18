@@ -17,13 +17,6 @@
 */
 import Dashboard from "views/Dashboard.js";
 import Users from "views/Users.js";
-import UserProfile from "views/UserProfile.js";
-import TableList from "views/TableList.js";
-import Typography from "views/Typography.js";
-import Icons from "views/Icons.js";
-import Maps from "views/Maps.js";
-import Notifications from "views/Notifications.js";
-import Upgrade from "views/Upgrade.js";
 import Chat from "views/Chat";
 import Login from "views/Login";
 
@@ -56,8 +49,7 @@ const dashboardRoutes = [
     icon: "nc-icon nc-chat-round",
     component: Chat,
     layout: "/admin",
-    permission: "view_chat"
-
+    permission: "view_chat",
   },
   {
     path: "/login",
