@@ -1,14 +1,9 @@
 import React from "react";
-import {
-  useLocation,
-  Switch,
-  Redirect,
-} from "react-router-dom";
+import { useLocation, Switch, Redirect } from "react-router-dom";
 
 import AdminNavbar from "components/Navbars/AdminNavbar";
 import Footer from "components/Footer/Footer";
 import Sidebar from "components/Sidebar/Sidebar";
-import FixedPlugin from "components/FixedPlugin/FixedPlugin.js";
 
 import routes from "routes.js";
 
@@ -54,20 +49,12 @@ function AdminLayout(props) {
               // <Switch>
               //   <Redirect to="/auth/login" />
               // </Switch>
-              <CaseLayout role="admin"/>
+              <CaseLayout role="admin" />
             )}
           </div>
           <Footer />
         </div>
       </div>
-      <FixedPlugin
-        hasImage={hasImage}
-        setHasImage={() => setHasImage(!hasImage)}
-        color={color}
-        setColor={(color) => setColor(color)}
-        image={image}
-        setImage={(image) => setImage(image)}
-      />{" "}
     </>
   );
 }

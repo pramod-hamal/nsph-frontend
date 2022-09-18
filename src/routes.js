@@ -53,7 +53,7 @@ const dashboardRoutes = [
   {
     path: "/chat",
     name: "Chat",
-    icon: "nc-icon nc-circle-09",
+    icon: "nc-icon nc-chat-round",
     component: Chat,
     layout: "/admin",
   },

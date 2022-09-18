@@ -51,6 +51,22 @@
     color: #3E3E3E;
   }
 
+   a{
+    font-family: Quicksand-Regular;
+    font-style: normal;
+    font-weight: 500;
+   }
+
+   td {
+    font-family: Inter-Regular;
+   }
+
+   th {
+    color: #677788;
+    font-family: Quicksand-Regular;
+    font-weight: 600;
+   }
+
   h1, h2, h3, h4, h5, h5 {
     font-family: Inter-Regular;
     font-weight: 600;
@@ -110,10 +126,35 @@
 
 .sidebar .logo-img img {
     max-width: 54px;
+    max-height: 45px;
 }
 
 .navbar {
     box-shadow: 0 0 2rem 0 rgb(41 48 66 / 10%);
+}
+
+.navbar .navbar-nav .nav-item .nav-link {
+    font-family: 'Inter-Regular';
+    color: #132144!important;
+    font-weight: 500;
+    transition: .3s all;
+}
+
+.navbar .navbar-nav .nav-item > button {
+    padding: 10px 15px;
+    border: none;
+    background: none;
+    padding: 10px 15px;
+    position: relative;
+    display: inline-flex;
+    margin: 8px 0;
+    font-family: 'Inter-Regular';
+    color: #132144!important;
+    font-weight: 500
+}
+
+.navbar .navbar-nav .nav-item > .nav-link:hover , .navbar .navbar-nav .nav-item > button:hover {
+    color: #1DC7EA!important;
 }
 
 .avatar-box .avatar-status {
@@ -215,3 +256,41 @@
     border-color: #05BAFF;
     color: #fff;
 }
+
+.scroll-y {
+    overflow-y: scroll;
+   
+}
+
+.scroll-y.height-500 {
+    height: 500px;
+}
+.scroll-y.height-600 {
+    height: 600px;
+}
+
+.scroll-y.height-450 {
+    height: 450px;
+}
+
+.scroll-y.height-288 {
+    height: 288px;
+}
+
+.scroll-y::-webkit-scrollbar {
+    width:5px;
+}
+.scroll-y::-webkit-scrollbar-track {
+    -webkit-box-shadow:inset 0 0 6px rgba(0,0,0,0.3); 
+    border-radius:5px;
+}
+.scroll-y::-webkit-scrollbar-thumb {
+    border-radius:5px;
+    -webkit-box-shadow: inset 0 0 6px #666; 
+}
+
+.table > thead > tr > th {
+    color: #677788;
+    font-weight: 600;
+}
+
