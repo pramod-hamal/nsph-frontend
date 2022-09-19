@@ -1,8 +1,9 @@
 import React, { useEffect, useState } from "react";
 // react-bootstrap components
-import { Link } from "react-router-dom";
+import { Link, Redirect } from "react-router-dom";
 import { Card, Table, Container, Row, Col } from "react-bootstrap";
 import { axios } from "utility/httpreq";
+import auth from "utility/auth";
 
 const Users = () => {
   const [users, setUsers] = useState(null);
@@ -18,7 +19,9 @@ const Users = () => {
 
     runAsync();
   }, []);
-  return (
+  const user = JSON.parse(localStorage.getItem("loggedInUser"));
+
+  let content = (
     <>
       <Container fluid>
         <Row className="mb-2">
@@ -36,8 +39,8 @@ const Users = () => {
               <Card.Header>
                 <Card.Title as="h4"> Users List </Card.Title>
                 {/* <p className="card-category">
-                  Here is a subtitle for this table
-                </p> */}
+              Here is a subtitle for this table
+            </p> */}
               </Card.Header>
               <Card.Body className="table-full-width table-responsive px-0">
                 <Table className="table-hover table-striped">
@@ -51,15 +54,18 @@ const Users = () => {
                     </tr>
                   </thead>
                   <tbody>
-                    {users && users.map( (user, index) => {
-                      return <tr>
-                      <td>{index + 1}</td>
-                      <td>{user.name}</td>
-                      <td>{user.email}</td>
-                      <td>{user.status}</td>
-                      <td>Admin</td>
-                    </tr>
-                    })}
+                    {users &&
+                      users.map((user, index) => {
+                        return (
+                          <tr>
+                            <td>{index + 1}</td>
+                            <td>{user.name}</td>
+                            <td>{user.email}</td>
+                            <td>{user.status}</td>
+                            <td>Admin</td>
+                          </tr>
+                        );
+                      })}
                   </tbody>
                 </Table>
               </Card.Body>
@@ -69,6 +75,11 @@ const Users = () => {
       </Container>
     </>
   );
+  if (auth(user)?.isRole("Admin") || auth(user)?.isUserAllowed("view_user")) {
+    return content;
+  } else {
+    return <Redirect to="/admin/dashboard" />;
+  }
 };
 
 export default Users;

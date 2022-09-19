@@ -18,7 +18,7 @@ function AdminLayout(props) {
   const mainPanel = React.useRef(null);
  const getRoutes = (routes) => {
     return routes.map((prop, key) => {
-      if (prop.layout === "/admin" && props.permission != "view_chat") {
+      if (prop.layout === "/admin" && prop.permission) {
         return (
           <Route
             path={prop.layout + prop.path}
@@ -30,6 +30,7 @@ function AdminLayout(props) {
       }
     });
   };
+
   React.useEffect(() => {
     document.documentElement.scrollTop = 0;
     document.scrollingElement.scrollTop = 0;
@@ -45,9 +46,7 @@ function AdminLayout(props) {
   }, [location]);
 
   const loggedInUser = localStorage.getItem("loggedInUser");
-  // if (!loggedInUser) {
-  //   props.history.push("/auth/login");
-  // }
+
 
   return (
     <>
