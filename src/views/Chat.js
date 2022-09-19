@@ -1,17 +1,21 @@
 import { client, xml } from "@xmpp/client";
 import React, { useEffect, useState } from "react";
-import debug from "@xmpp/debug";
-import { Card, Container, Row, Col } from "react-bootstrap";
 import { Redirect } from "react-router-dom";
+import { Card, Container, Row, Col, Modal, Button } from "react-bootstrap";
 import auth from "utility/auth";
+import debug from "@xmpp/debug";
 
 //const sendTo = 'facillator1@chat.leanq.com.np';
 const sendTo = "rajendra15@chat.leanq.com.np";
 let xmpp = {};
 let iqCaller = null;
 localStorage.setItem("message", JSON.stringify({}));
+
+
+
 const Chat = () => {
   const user = JSON.parse(localStorage.getItem("loggedInUser"));
+  const [showModal, setShowModal] = React.useState(false);
   const messages = JSON.parse(localStorage.getItem("message") || {});
   const username = user?.email?.split("@")[0] || "testuser";
   const [message, setMessage] = useState("");
@@ -103,6 +107,10 @@ const Chat = () => {
     // };
   };
 
+
+
+
+  
   let contents = (
     <>
       <Container fluid>
@@ -124,9 +132,7 @@ const Chat = () => {
                         <a href="#" className="chat-username">
                           Sam Smith
                         </a>
-                        <div className="fw-semibold text-muted">
-                          sam@smith.com
-                        </div>
+                        <div className="fw-semibold text-muted">sam@smith.com</div>
                       </div>
                     </div>
                   </div>
@@ -172,9 +178,7 @@ const Chat = () => {
                         <a href="#" className="chat-username">
                           Sam Smith
                         </a>
-                        <div className="fw-semibold text-muted">
-                          sam@smith.com
-                        </div>
+                        <div className="fw-semibold text-muted">sam@smith.com</div>
                       </div>
                     </div>
                   </div>
@@ -220,9 +224,7 @@ const Chat = () => {
                         <a href="#" className="chat-username">
                           Sam Smith
                         </a>
-                        <div className="fw-semibold text-muted">
-                          sam@smith.com
-                        </div>
+                        <div className="fw-semibold text-muted">sam@smith.com</div>
                       </div>
                     </div>
                   </div>
@@ -275,11 +277,12 @@ const Chat = () => {
                     <div className="flex-grow-1 ml-3">
                       <span className="chat-username-sm">Bertha Martin</span>
                       <div className="text-muted small">
-                        <em>Typing...</em>
+                        <em> Online </em>
                       </div>
                     </div>
                     <div>
                       <button
+                        onClick={() => setShowModal(true)}
                         type="button"
                         className="mr-2 voice-call-btn d-md-inline-block btn btn-info"
                       >
@@ -511,18 +514,55 @@ const Chat = () => {
                 </div>
               </Card.Footer>
             </Card>
+
+            {/* Mini Modal */}
+            <Modal
+              className="modal-mini modal-primary"
+              show={showModal}
+              onHide={() => setShowModal(false)}
+            >
+              <Modal.Header className="justify-content-center">
+                <div className="modal-profile">
+                  <i className="nc-icon nc-bulb-63"></i>
+                </div>
+              </Modal.Header>
+              <Modal.Body className="text-center">
+                <p>Always have an access to your profile</p>
+              </Modal.Body>
+              <div className="modal-footer">
+                <Button
+                  className="btn-simple"
+                  type="button"
+                  variant="link"
+                  onClick={() => setShowModal(false)}
+                >
+                  Back
+                </Button>
+                <Button
+                  className="btn-simple"
+                  type="button"
+                  variant="link"
+                  onClick={() => setShowModal(false)}
+                >
+                  Close
+                </Button>
+              </div>
+            </Modal>
+            {/* End Modal */}
           </Col>
         </Row>
-        <button onClick={() => sendMessage("My message")}>Send</button>
       </Container>
     </>
   );
+
   return auth(user).isRole("Facilitator") ||
-    auth(user).isUserAllowed("view_chat") ? (
-    contents
-  ) : (
-    <Redirect to="/admin/dashboard" />
-  );
+  auth(user).isUserAllowed("view_chat") ? (
+  contents
+) : (
+  <Redirect to="/admin/dashboard" />
+);
+
+
 };
 
 export default Chat;

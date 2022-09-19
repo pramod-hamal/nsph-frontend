@@ -294,3 +294,24 @@
     font-weight: 600;
 }
 
+/* call popup */
+
+.btn-circle {
+    border-radius: 50px;
+    border: none;
+    color: #fff!important;
+    width: 50px!important;
+    height: 50px!important;
+    line-height: 50px!important;
+    text-align: center;
+    padding: 0!important;
+}
+
+.btn-start-call {
+    background: green!important;
+    
+}
+.btn-end-call {
+    background: red!important;
+    
+}
