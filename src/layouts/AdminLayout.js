@@ -1,6 +1,7 @@
 import React from "react";
 import { useLocation, Switch, Redirect, Route } from "react-router-dom";
 
+
 import AdminNavbar from "components/Navbars/AdminNavbar";
 import Footer from "components/Footer/Footer";
 import Sidebar from "components/Sidebar/Sidebar";
@@ -13,17 +14,23 @@ import { faPhone, faTimes } from "@fortawesome/fontawesome-free-solid";
 import routes from "routes.js";
 
 import sidebarImage from "assets/img/sidebar-3.jpg";
+// import logo from "assets/img/reactlogo.png";
+
 import AddUser from "views/AddUser";
 import EditUser from "views/EditUser";
+import VoiceCall from "views/VoiceCall";
+
 function AdminLayout(props) {
   const [image, setImage] = React.useState(sidebarImage);
   const [color, setColor] = React.useState("white");
 
-  const [showModal, setShowModal] = React.useState(false);
+  const [showModal, setShowModal] = React.useState(true);
 
   const [hasImage, setHasImage] = React.useState(true);
   const location = useLocation();
   const mainPanel = React.useRef(null);
+
+
   const getRoutes = (routes) => {
     return routes.map((prop, key) => {
       if (prop.layout === "/admin" && prop.permission) {
@@ -37,6 +44,15 @@ function AdminLayout(props) {
         );
       }
     });
+  };
+
+  const getBrandText = () => {
+    for (let i = 0; i < routes.length; i++) {
+      if (location.pathname.indexOf(routes[i].layout + routes[i].path) !== -1) {
+        return routes[i].name;
+      }
+    }
+    return "Brand";
   };
 
   React.useEffect(() => {
@@ -69,7 +85,7 @@ function AdminLayout(props) {
             Launch Modal
           </Button> */}
           <AdminNavbar />
-          <div className="content">
+          <div className="content" id={getBrandText()}>
             {loggedInUser ? (
               <>
                 <Switch>
@@ -99,6 +115,8 @@ function AdminLayout(props) {
                     path={"/admin/user/edit"}
                     component={EditUser}
                   ></Route>
+                 
+                
                 </Switch>
               </>
               // <CaseLayout role="admin" />
@@ -118,6 +136,9 @@ function AdminLayout(props) {
           {/* <div className="modal-profile">
             <i className="nc-icon nc-bulb-63"></i>
           </div> */}
+          <div className="logo-img">
+            <img src={require("assets/img/logo-sm.png")} alt="..." />
+          </div>
         </Modal.Header>
         <Modal.Body className="text-center">
           <div class="d-flex align-items-center py-1 flex-column">
