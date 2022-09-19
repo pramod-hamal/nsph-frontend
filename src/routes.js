@@ -19,6 +19,7 @@ import Dashboard from "views/Dashboard.js";
 import Users from "views/Users.js";
 import Chat from "views/Chat";
 import Login from "views/Login";
+import VoiceCall from "views/VoiceCall";
 
 const dashboardRoutes = [
   // {
@@ -57,6 +58,13 @@ const dashboardRoutes = [
     icon: "nc-icon nc-circle-09",
     component: Login,
     layout: "/auth",
+  },
+  {
+    path: "/call/voice-call",
+    name: "VoiceCall",
+    icon: "nc-icon nc-circle-09",
+    component: VoiceCall,
+    layout: "/admin",
   },
   // {
   //   path: "/login",
