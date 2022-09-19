@@ -10,12 +10,16 @@ import { faEdit, faTrash } from "@fortawesome/fontawesome-free-solid";
 
 const Users = () => {
   const [users, setUsers] = useState(null);
+  const [loading, setLoading] = useState(false);
   useEffect(() => {
     const runAsync = async function () {
       try {
+        setLoading(true);
         const response = await axios(true).get("/api/user/list");
         setUsers(response.data);
+        setLoading(false);
       } catch (err) {
+        setLoading(false);
         console.log("error is", err);
       }
     };
@@ -24,7 +28,9 @@ const Users = () => {
   }, []);
   const user = JSON.parse(localStorage.getItem("loggedInUser"));
 
-  let content = (
+  let content = loading ? (
+    <p>Loading....</p>
+  ) : (
     <>
       <Container fluid>
         <Row className="mb-2">
@@ -77,14 +83,17 @@ const Users = () => {
                     {users &&
                       users.map((user, index) => {
                         return (
-                          <tr>
+                          <tr key={index}>
                             <td>{index + 1}</td>
                             <td>{user.name}</td>
                             <td>{user.email}</td>
                             <td>{user.status}</td>
                             <td>Admin</td>
                             <td>
-                              <Link to="/admin/user/edit" className="mr-3">
+                              <Link
+                                to={"/admin/user/edit/" + user._id}
+                                className="mr-3"
+                              >
                                 <FontAwesomeIcon icon={faEdit} />
                               </Link>
                               <Link to="" className="">

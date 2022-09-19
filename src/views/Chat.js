@@ -11,8 +11,6 @@ let xmpp = {};
 let iqCaller = null;
 localStorage.setItem("message", JSON.stringify({}));
 
-
-
 const Chat = () => {
   const user = JSON.parse(localStorage.getItem("loggedInUser"));
   const [showModal, setShowModal] = React.useState(false);
@@ -31,7 +29,7 @@ const Chat = () => {
       service: "wss://chat.leanq.com.np:5281/xmpp-websocket",
       domain: "chat.leanq.com.np",
       resource: "chat.leanq.com.np",
-      username: username,
+      username: "rajendra15",
       password: "12345678",
     });
 
@@ -47,13 +45,11 @@ const Chat = () => {
     });
 
     xmpp.on("stanza", async (stanza) => {
-      //console.log('stanza')
-      // console.log(stanza.toString());
       try {
         if (stanza.is("message")) {
-
+          console.log("messaagdlkjasdf", stanza.toString())
           let msg = stanza.children[0].children[0];
-          console.log("message is", msg);
+          console.log("message ", msg);
           await xmpp.send(xml("presence", { type: "available" }));
 
           // await xmpp.stop()
@@ -64,25 +60,15 @@ const Chat = () => {
     });
 
     xmpp.on("online", async (address) => {
-      // Makes itself available
-      await xmpp.send(xml("presence"));
-      // console.log("stanza");
-      // Sends a chat message
-      // const message_send = xml(
-      //   "message",
-      //   { type: "chat", to: sendTo },
-      //   xml("body", {}, messages)
-      // );
-      // await xmpp.send(message_send);
+      await xmpp.send(xml("presence", { type: "available" }));
     });
+
     xmpp.start().catch(function (err) {
       // console.log("This is error", err)
     });
   }, []);
-
   const sendMessage = async () => {
     if (!message) return;
-    console.log("message_send", message);
 
     const message_xml = xml(
       "message",
@@ -90,27 +76,9 @@ const Chat = () => {
       xml("body", {}, message)
     );
 
-    
     await xmpp.send(message_xml);
-
-    const response = await iqCaller.request(
-      xml("iq", { type: "get" }, xml(username, `${username}:${sendTo}`)),
-      30 * 1000, // 30 seconds timeout - default
-    );
-    const foo = response.getChild(username, `${username}:${sendTo}`);
-    console.log(foo);
-
-    // let messageObj = {
-    //   originId: messages.length + 1,
-    //   isSender: true,
-    //   message_send,
-    // };
   };
 
-
-
-
-  
   let contents = (
     <>
       <Container fluid>
@@ -132,7 +100,9 @@ const Chat = () => {
                         <a href="#" className="chat-username">
                           Sam Smith
                         </a>
-                        <div className="fw-semibold text-muted">sam@smith.com</div>
+                        <div className="fw-semibold text-muted">
+                          sam@smith.com
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -178,7 +148,9 @@ const Chat = () => {
                         <a href="#" className="chat-username">
                           Sam Smith
                         </a>
-                        <div className="fw-semibold text-muted">sam@smith.com</div>
+                        <div className="fw-semibold text-muted">
+                          sam@smith.com
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -224,7 +196,9 @@ const Chat = () => {
                         <a href="#" className="chat-username">
                           Sam Smith
                         </a>
-                        <div className="fw-semibold text-muted">sam@smith.com</div>
+                        <div className="fw-semibold text-muted">
+                          sam@smith.com
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -556,13 +530,11 @@ const Chat = () => {
   );
 
   return auth(user).isRole("Facilitator") ||
-  auth(user).isUserAllowed("view_chat") ? (
-  contents
-) : (
-  <Redirect to="/admin/dashboard" />
-);
-
-
+    auth(user).isUserAllowed("view_chat") ? (
+    contents
+  ) : (
+    <Redirect to="/admin/dashboard" />
+  );
 };
 
 export default Chat;

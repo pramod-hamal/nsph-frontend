@@ -4,6 +4,7 @@ import Users from "views/Users.js";
 import Chat from "views/Chat";
 import Login from "views/Login";
 import VoiceCall from "views/VoiceCall";
+import Notifications from "views/Notifications";
 
 const dashboardRoutes = [
   // {
@@ -32,7 +33,7 @@ const dashboardRoutes = [
     permission: "view_user",
     role:"Admin"
   },
-  {
+  { 
     path: "/chat",
     name: "Chat",
     icon: "nc-icon nc-chat-round",
@@ -40,7 +41,6 @@ const dashboardRoutes = [
     role:"Facilitator",
     permission:"view_chat",
     layout: "/admin",
-    permission: "view_chat",
   },
   {
     path: "/login",
@@ -49,13 +49,13 @@ const dashboardRoutes = [
     component: Login,
     layout: "/auth",
   },
-  {
-    path: "/call/voice-call",
-    name: "VoiceCall",
-    icon: "nc-icon nc-circle-09",
-    component: VoiceCall,
-    layout: "/admin",
-  },
+  // {
+  //   path: "/voice-call",
+  //   name: "VoiceCall",
+  //   icon: "nc-icon nc-circle-09",
+  //   component: VoiceCall,
+  //   layout: "/admin",
+  // },
   // {
   //   path: "/login",
   //   name: "Chat",
@@ -97,7 +97,9 @@ const dashboardRoutes = [
   //   name: "Notifications",
   //   icon: "nc-icon nc-bell-55",
   //   component: Notifications,
-  //   layout: "/admin"
+  //   layout: "/admin",
+  //   role:"Admin",
+  //   permission:"view_chat",
   // },
 ];
 

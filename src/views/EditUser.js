@@ -1,11 +1,14 @@
 import React, { useEffect, useState } from "react";
 import { Button, Card, Form, Container, Row, Col } from "react-bootstrap";
-import { useHistory } from "react-router";
+import { useHistory, useParams } from "react-router";
 import { axios } from "utility/httpreq";
 
 const AddUser = () => {
   const history = useHistory();
+  const params = useParams();
   const [roles, setRoles] = useState(null);
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(false);
   const [formData, setFormData] = useState({
     firstname: "",
     lastname: "",
@@ -16,9 +19,21 @@ const AddUser = () => {
   useEffect(() => {
     const runAsync = async function () {
       try {
+        setLoading(true);
+        let  user = await axios(true).get("/api/user/" + params.id);
+        user = user.data;
+        setFormData({
+          ...formData,
+          firstname: (user && user.name && user.name.split(" ")[0]) || " ",
+          lastname: (user && user.name && user.name.split(" ").pop()) || " ",
+          role: user && user.roles[0] && user.roles[0].name,
+          email: user && user.email || " "
+        });
         const response = await axios(true).get("/api/role/list");
         setRoles(response.data);
+        setLoading(false);
       } catch (err) {
+        setLoading(false);
         console.log("error is", err);
       }
     };
@@ -57,7 +72,7 @@ const AddUser = () => {
                           placeholder="First Name"
                           type="text"
                           name="firstname"
-                          value={formData.firstname}
+                          value={formData.lastname}
                           required
                           onChange={handleChange}
                         ></Form.Control>
@@ -70,7 +85,7 @@ const AddUser = () => {
                           placeholder="Last Name"
                           type="text"
                           name="lastname"
-                          value={formData.lastname}
+                          value={formData?.lastname}
                           required
                           onChange={handleChange}
                         ></Form.Control>
@@ -97,7 +112,7 @@ const AddUser = () => {
                       <Form.Group>
                         <label htmlFor="exampleInputPassword">Password</label>
                         <Form.Control
-                          placeholder="Password"
+                          placeholder="Leave Empty is you don't want to change"
                           type="password"
                           name="password"
                           value={formData.password}
@@ -109,13 +124,28 @@ const AddUser = () => {
                   </Row>
 
                   <Row>
+                    <Col className="pl-1" md="6">
+                      <Form.Group>
+                        <label htmlFor="exampleInputConfirmPassword">
+                          Confirm Password
+                        </label>
+                        <Form.Control
+                          placeholder="Should match with password"
+                          type="password"
+                          name="confirmPassword"
+                          value={formData.confirmPassword}
+                          onChange={handleChange}
+                          required
+                        ></Form.Control>
+                      </Form.Group>
+                    </Col>
                     <Col className="pr-1" md="6">
                       <Form.Group>
                         <label htmlFor="typeSelect">Role</label>
                         <select
                           required
                           name="role"
-                          class="form-control"
+                          className="form-control"
                           onChange={handleChange}
                         >
                           <option></option>
@@ -123,7 +153,6 @@ const AddUser = () => {
                             roles.map(function (role) {
                               return (
                                 <option key={role._id} value={role._id}>
-                                  {" "}
                                   {role.name}
                                 </option>
                               );

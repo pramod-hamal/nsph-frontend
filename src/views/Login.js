@@ -2,7 +2,7 @@
 import React, { useEffect, useState } from "react";
 import { axios } from "utility/httpreq";
 // import {useNavigate} from "react-router-dom"
-
+import notify from "utility/notify";
 import {
 
   Button,
@@ -13,10 +13,11 @@ import {
   Row,
   Col,
 } from "react-bootstrap";
+import CustomizedButton from "components/common/CustomizedButton";
 
 const Login = (props) => {
 
-
+  const [isLogging, setIsLogging] = useState(false);
   const user = JSON.parse(localStorage.getItem("loggedInUser"));
   useEffect(() => {
     if(user) {
@@ -35,11 +36,16 @@ const Login = (props) => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try{
+      setIsLogging(true);
       const response = await axios().post("/api/auth/login", info);
       localStorage.setItem("loggedInUser", JSON.stringify(response.data.user));
       localStorage.setItem("token", response.data.token);
+      setIsLogging(false)
+      notify.showSuccess("Welcome")
       props.history.push("/admin/dashboard")
     }catch(err) {
+      setIsLogging(false)
+      notify.showError("Failed to login");
       console.log("error ", err);
     }
   }
@@ -100,13 +106,14 @@ const Login = (props) => {
 
                       <Row className="mt-4">
                         <Col className="pl-5 pr-5" md="12">
-                          <Button
+                          {/* <Button
                             className="btn-fill btn-block"
                             type="submit"
                             variant="info"
                           >
                             Login
-                          </Button>
+                          </Button> */}
+                          <CustomizedButton isDisabled={isLogging} enabledLable="Login" disabledLable="Logging..." />
                         </Col>
                       </Row>
 

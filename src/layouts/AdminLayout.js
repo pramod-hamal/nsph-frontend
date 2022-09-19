@@ -19,12 +19,13 @@ import sidebarImage from "assets/img/sidebar-3.jpg";
 import AddUser from "views/AddUser";
 import EditUser from "views/EditUser";
 import VoiceCall from "views/VoiceCall";
+import NotFound from "views/NotFound";
 
 function AdminLayout(props) {
   const [image, setImage] = React.useState(sidebarImage);
   const [color, setColor] = React.useState("white");
 
-  const [showModal, setShowModal] = React.useState(true);
+  const [showModal, setShowModal] = React.useState(false);
 
   const [hasImage, setHasImage] = React.useState(true);
   const location = useLocation();
@@ -48,12 +49,15 @@ function AdminLayout(props) {
 
   const getBrandText = () => {
     for (let i = 0; i < routes.length; i++) {
-      if (location.pathname.indexOf(routes[i].layout + routes[i].path) !== -1) {
+      if (location.pathname.indexOf(routes[i].layout + routes[i].path) > -1) {
         return routes[i].name;
       }
     }
-    return "Brand";
+
+    return  location.pathname.split("/").pop();
   };
+ 
+ 
 
   React.useEffect(() => {
     document.documentElement.scrollTop = 0;
@@ -70,7 +74,6 @@ function AdminLayout(props) {
   }, [location]);
 
   const loggedInUser = localStorage.getItem("loggedInUser");
-
 
   return (
     <>
@@ -89,12 +92,23 @@ function AdminLayout(props) {
             {loggedInUser ? (
               <>
                 <Switch>
-                  {getRoutes(routes)}
+                  {getRoutes(routes)} 
                   <Route
                     exact
                     path={"/admin/user/add"}
                     component={AddUser}
                   ></Route>{" "}
+                      <Route
+                    exact
+                    path={"/admin/user/edit/:id"}
+                    component={EditUser}
+                  ></Route>
+                  <Route
+                    exact
+                    path={"/admin/call/voice-call"}
+                    component={VoiceCall}
+                  ></Route>
+                  <Route component={NotFound}></Route>
                 </Switch>
               </>
             ) : (
@@ -115,8 +129,13 @@ function AdminLayout(props) {
                     path={"/admin/user/edit"}
                     component={EditUser}
                   ></Route>
+                  <Route
+                    exact
+                    path={"/admin/call/voice-call"}
+                    component={VoiceCall}
+                  ></Route>
                  
-                
+                 <Route component={NotFound}/>
                 </Switch>
               </>
               // <CaseLayout role="admin" />
@@ -141,15 +160,15 @@ function AdminLayout(props) {
           </div>
         </Modal.Header>
         <Modal.Body className="text-center">
-          <div class="d-flex align-items-center py-1 flex-column">
-            <div class="position-relative">
+          <div className="d-flex align-items-center py-1 flex-column">
+            <div className="position-relative">
               <div className="avatar-box bg-light-danger">
                 <span className="avatar-label">BM</span>
               </div>
             </div>
-            <div class="flex-grow-1 ml-3">
-              <span class="chat-username-sm">Bertha Martin</span>
-              <div class="text-muted small">
+            <div className="flex-grow-1 ml-3">
+              <span className="chat-username-sm">Bertha Martin</span>
+              <div className="text-muted small">
                 <em> Incoming Call </em>
               </div>
             </div>
@@ -161,14 +180,14 @@ function AdminLayout(props) {
           <div className="call-control-btns d-flex justify-content-center w-100">
             <button
               type="button"
-              class="mr-2 btn-circle btn-start-call d-md-inline-block btn"
+              className="mr-2 btn-circle btn-start-call d-md-inline-block btn"
             >
               {/* <FontAwesomeIcon icon="fas fa-phone-alt" /> */}
               <FontAwesomeIcon icon={faPhone} />
             </button>
             <button
               type="button"
-              class="mr-2 btn-circle btn-end-call d-md-inline-block btn"
+              className="mr-2 btn-circle btn-end-call d-md-inline-block btn"
             >
               {/* <FontAwesomeIcon icon="fas fa-phone-alt" /> */}
               <FontAwesomeIcon icon={faTimes} />

@@ -318,7 +318,7 @@
 
 /* voice call page */
 
-#VoiceCall {
+#voice-call {
     padding: 0;
     height: calc(100% - 123px);
 }

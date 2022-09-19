@@ -1,52 +1,51 @@
+import CustomizedButton from "components/common/CustomizedButton";
 import React, { useEffect, useState } from "react";
-import {
 
-  Button,
-  Card,
-  Form,
-  Container,
-  Row,
-  Col,
-} from "react-bootstrap";
+import { Card, Form, Container, Row, Col } from "react-bootstrap";
 import { useHistory } from "react-router";
 import { axios } from "utility/httpreq";
+import notify from "utility/notify";
 
 const AddUser = () => {
   const history = useHistory();
+  const [isLogging, setIsLogging] = useState(false);
   const [roles, setRoles] = useState(null);
   const [formData, setFormData] = useState({
     firstname: "",
-    lastname:"",
-    email:"",
-    password:"",
-    role:""
-  })
-  useEffect( () => {
-    const runAsync = async function(){
-      try{
+    lastname: "",
+    email: "",
+    password: "", 
+    role: "",
+  });
+  useEffect(() => {
+    const runAsync = async function () {
+      try {
         const response = await axios(true).get("/api/role/list");
         setRoles(response.data);
-      }catch(err){
+      } catch (err) {
         console.log("error is", err);
       }
-     
-    }
+    };
     runAsync();
-  }, [])
-
+  }, []);
+  
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
+      setIsLogging(true);
       await axios(true).post("/api/user/create", formData);
-      history.push("/admin/user")
+      setIsLogging(false);
+      history.push("/admin/user");
+      notify.showSuccess("User added successfully");
     } catch (error) {
-      console.log("error is", error);
+      setIsLogging(false);
+      notify.showError(error.response);
     }
-  }
+  };
   const handleChange = (e) => {
-    const {name, value} = e.target;
-    setFormData({...formData, [name]: value})
-  }
+    const { name, value } = e.target;
+    setFormData({ ...formData, [name]: value });
+  };
   return (
     <>
       <Container fluid>
@@ -82,7 +81,6 @@ const AddUser = () => {
                           value={formData.lastname}
                           required
                           onChange={handleChange}
-
                         ></Form.Control>
                       </Form.Group>
                     </Col>
@@ -100,7 +98,6 @@ const AddUser = () => {
                           value={formData.email}
                           required
                           onChange={handleChange}
-
                         ></Form.Control>
                       </Form.Group>
                     </Col>
@@ -113,7 +110,6 @@ const AddUser = () => {
                           name="password"
                           value={formData.password}
                           onChange={handleChange}
-
                           required
                         ></Form.Control>
                       </Form.Group>
@@ -124,13 +120,22 @@ const AddUser = () => {
                     <Col className="pr-1" md="6">
                       <Form.Group>
                         <label htmlFor="typeSelect">Role</label>
-                        <select required name="role" class="form-control" onChange={handleChange}>
+                        <select
+                          required
+                          name="role"
+                          className="form-control"
+                          onChange={handleChange}
+                        >
                           <option></option>
-                          {
-                            roles && roles.map(function(role){
-                              return <option key={role._id} value={role._id}> {role.name}</option>
-                            })
-                          }
+                          {roles &&
+                            roles.map(function (role) {
+                              return (
+                                <option key={role._id} value={role._id}>
+                                  {" "}
+                                  {role.name}
+                                </option>
+                              );
+                            })}
                         </select>
                       </Form.Group>
                     </Col>
@@ -138,13 +143,17 @@ const AddUser = () => {
 
                   <Row className="mt-3">
                     <Col className="pr-1" md="12">
-                      <Button
+                      {/* <Button
                         className="btn-fill pull-right"
                         type="submit"
                         variant="info"
                       >
                         Submit
-                      </Button>
+                      </Button> */}
+                      <CustomizedButton
+                        isDisabled={isLogging}
+                        classNames="btn-fill pull-right"
+                      />
                     </Col>
                   </Row>
 
